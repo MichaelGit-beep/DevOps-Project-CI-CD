@@ -1,1 +1,1 @@
-CD
+CI/CD project
