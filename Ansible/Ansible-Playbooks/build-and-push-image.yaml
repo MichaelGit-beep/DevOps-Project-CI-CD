@@ -11,4 +11,4 @@
   - name: push to dockerhub
     command: docker push akicontport/simple-devops-image
   - name: delete images
-    command: docker rmi akicontport/simple-devops-image simple-devops-image
+    command: docker rmi akicontport/simple-devops-image simple-devops-image tomcat 
