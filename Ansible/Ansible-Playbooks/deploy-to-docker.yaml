@@ -10,7 +10,7 @@
     command: docker rm simple-devops-container
     ignore_errors: yes
   - name: remove old image
-    command: docker rmi akicontport/simple-devops-image
+    command: docker rmi akicontport/simple-devops-image tomcat
     ignore_errors: yes
   - name: create docker image using docker command
     command: "docker run -d --name simple-devops-container -p 8080:8080 akicontport/simple-devops-image"
