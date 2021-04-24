@@ -1,0 +1,35 @@
+---
+- name: Install httpd and php
+  hosts: node01
+  tasks: 
+  - yum:
+     name: "{{ item }}"
+     state: installed
+    loop:
+    - httpd
+    - php
+  - name: change document root
+    replace:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: 'DocumentRoot "/var/www/html"'
+      replace: 'DocumentRoot "/var/www/html/myroot"'
+  - file: 
+     path: /var/www/html/myroot
+     state: directory
+     mode: '0755'
+     owner: apache
+     group: apache
+  - template:
+     src: templates/phpinfo.php.j2
+     dest: /var/www/html/myroot/phpinfo.php
+     owner: apache
+     group: apache
+  - service: 
+     name: httpd
+     state: started
+     enabled: yes
+  - firewalld:
+     port: 80/tcp
+     zone: public 
+     permanent: yes
+     state: enabled
